@@ -5,7 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/_Scenes/MainMenuScreen.unity
+    guid: d7a5d6f8a8b6c3b45910329cad30d9b1
+  - enabled: 1
+    path: Assets/_Scenes/CreditsScreen.unity
+    guid: 4afdf1274b4972d4099becb7408ae77e
+  - enabled: 1
+    path: Assets/_Scenes/KeysSelectedScreen.unity
+    guid: 6a98275cdc53cc24e8e4724fef2a751b
+  - enabled: 1
+    path: Assets/_Scenes/GameScreen.unity
+    guid: 09ce250276a41c34698743a25ab953fd
+  - enabled: 1
+    path: Assets/_Scenes/PauseScreen.unity
+    guid: 4fdd437fbe0a7d74faf55ee8ca08b6db
+  - enabled: 1
+    path: Assets/_Scenes/WinningScreen.unity
+    guid: 8458a10ea3a87ec40a19bd906f67f9f3
+  - enabled: 1
+    path: Assets/_Scenes/GameLossScreen.unity
+    guid: 905c19541aafda34d9f6f5b70f64737e
   m_configObjects: {}

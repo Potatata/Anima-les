@@ -61,7 +61,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BodyParts.cs" />
     <Compile Include="Assets\Scripts\GameBar.cs" />
+    <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\InputKeys.cs" />
+    <Compile Include="Assets\Scripts\Potion.cs" />
+    <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\Turn.cs" />
     <Compile Include="Assets\Scripts\VectorPair.cs" />
     <Reference Include="UnityEditor.StandardEvents">

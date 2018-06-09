@@ -21,7 +21,7 @@ public class InputKeys
 
     public void generateLetter ()
     {
-        letter = (char) ('A'  + (int) UnityEngine.Random.Range(0, 27));
+        letter = (char) ('A'  + (int) UnityEngine.Random.Range(0, 26));
         Dictionary<char, KeyCode> hash = new Dictionary<char, KeyCode>();
          hash.Add('A', KeyCode.A);
          hash.Add('B', KeyCode.B);

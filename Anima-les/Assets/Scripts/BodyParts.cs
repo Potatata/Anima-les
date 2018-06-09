@@ -1,3 +1,3 @@
 ﻿
-public enum BodyParts { Hand, Feet, Mouth, Eye }
+public enum BodyParts { Wings, Feet, Mouth, Eye }
 

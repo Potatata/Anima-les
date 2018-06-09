@@ -685,6 +685,7 @@ MonoBehaviour:
   y: 20
   height: 20
   width: 50
+  currentTime: 35
 --- !u!1 &989240736
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +731,7 @@ MonoBehaviour:
   printTextKeys: {fileID: 920343686}
   timeTextKeysFirstTime: 5
   timeTextKeysOtherTimes: 2
+  currentTime: 35
 --- !u!4 &989240738
 Transform:
   m_ObjectHideFlags: 0
@@ -1334,7 +1336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1429302324
 MonoBehaviour:
   m_ObjectHideFlags: 0

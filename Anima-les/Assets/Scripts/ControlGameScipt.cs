@@ -29,7 +29,6 @@ public class ControlGameScipt : MonoBehaviour {
     private int animalForTheTurn;
     private int pointerInArray;
     private bool isInKeyCanvas;
-    private float lastTimePressed =0;
 
     // Data arrays
     private InputKeys[] keySettings;
@@ -37,8 +36,6 @@ public class ControlGameScipt : MonoBehaviour {
 
     void Start ()
     {   
-        //gets which animal we will do
-        animalForTheTurn = (int)Random.Range(0, 4);
 
         //instance variables and arrays
         keySettings = new InputKeys[4];
@@ -70,13 +67,15 @@ public class ControlGameScipt : MonoBehaviour {
         printTextKeys.text = stringText;
 
         //Show key screen for some seconds
-        ShowSubMenu(timeTextKeysFirstTime);
+        StartCoroutine(ShowSubMenu(timeTextKeysFirstTime));
+        
     }
 
     IEnumerator ShowSubMenu(float value)
     {
         KeysCanvas.SetActive(true);
         GameCanvas.SetActive(false);
+
         isInKeyCanvas = true;
         yield return new WaitForSeconds(value);
         KeysCanvas.SetActive(false);
@@ -88,10 +87,10 @@ public class ControlGameScipt : MonoBehaviour {
     void Update () {
         currentTime -= Time.deltaTime;
         //If there was any kind of input
-        if (Input.anyKey)
+        if (Input.anyKeyDown)
         {
             //Check if there still has been no timeout
-            if(currentTime< 0.0f)
+            if (currentTime < 0.0f)
                 SceneManager.LoadScene(LOSSSCREEN);
             // If it is in keycanvas, don't do anthing this turn
             if (isInKeyCanvas)
@@ -135,16 +134,28 @@ public class ControlGameScipt : MonoBehaviour {
                         HealthSet();
                     }
                 }
+
             }
         }
-        
+
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Debug.Log("Yay");
+        //}
+        //else
+        //{
+        //    Debug.Log("Nay");
+        //}
     }
+
     private void getNextFour()
     {
         pointerInArray = 0;
         // Generate the body parts
-        for (int index = 0; index < 4; ++index, currentTilesToDo[index].SetBodyPart((BodyParts)Random.Range(0, 4)));
-
+        for (int index = 0; index < 4; ++index, currentTilesToDo[index].SetBodyPart((BodyParts)Random.Range(0, 4)))
+        {
+            Debug.Log(currentTilesToDo[index]);
+        }
     }
 
     private void setValues()
@@ -183,11 +194,13 @@ public class ControlGameScipt : MonoBehaviour {
                     MagicFraskIconEmpty.SetActive(true);
                     break;
             }
+            ShowSubMenu(timeTextKeysOtherTimes);
         }
     }
 
     private void HealthSet()
     {
+        Debug.Log("Perdi un punto");
         //If it is the incorrect key, we have to reduce a life and check if we have a gameover
         // Reduce the amount of hearts in the game
         --currentHealth;

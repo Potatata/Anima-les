@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Timer : MonoBehaviour {
-    public float currentTime;
-
     public float x;
     public float y;
     public float height;
     public float width;
-	// Use this for initialization
-	void Start () {
+    public float currentTime;
+
+    // Use this for initialization
+    void Start () {
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-	}
+        currentTime -= Time.deltaTime;
+    }
 
     private void OnGUI()
     {

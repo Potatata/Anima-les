@@ -72,7 +72,7 @@ public class ControlGameScipt : MonoBehaviour {
                 }
 
                 //Show the screen while a key is pressed
-
+                
             }
         }
         //Check if we got the correct input

@@ -36,7 +36,7 @@ public class InputKeys
         // @todo add all
     }
 
-    public KeyCode getKeyCode() { return keyCode; }
+    public KeyCode GetKeyDownCode() { return keyCode; }
     public char getLetter() { return letter; }
 
 

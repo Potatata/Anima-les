@@ -12,9 +12,17 @@ public class ControlGameScipt : MonoBehaviour {
     private const int LOSSSCREEN = 4;
     public const int NUMBEROFTILESTOCOMPLETE = 40;
 
-    //References
-    public GameObject Health1, Health2, Health3, Timer, Witch, GameBar, Potion, MagicFraskIconFull, MagicFraskIconHalfFull, MagicFraskIconNotVeryEmpty, MagicFraskIconEmpty, KeysCanvas, GameCanvas;
+    // Constants place in screen
+    private const int PLACESQUARE1 = 30;
+    private const int PLACESQUARE2 = 60;
+    private const int PLACESQUARE3 = 90;
+    private const int PLACESQUARE4 = 120;
 
+
+    //References
+    public GameObject Health1, Health2, Health3, Timer, Witch, GameBar;
+    public GameObject MagicFraskIconFull, MagicFraskIconHalfFull, MagicFraskIconNotVeryEmpty, MagicFraskIconEmpty, KeysCanvas, GameCanvas;
+    
     //Health in the game
     public int currentHealth;
     public int potionLevel;
@@ -61,21 +69,21 @@ public class ControlGameScipt : MonoBehaviour {
 
         //Set variables for the beggining of the game
         setValues();
-       
+        // Set the first vector to do
+        getNextFour();
+
         // Save the text for the KeysMenu
-        string stringText= keySettings[0].getLetter().ToString() + "\t" + keySettings[1].getLetter().ToString() + "\t" + keySettings[2].getLetter().ToString() + "\t" + keySettings[3].getLetter().ToString() + "\t";
+        string stringText = keySettings[0].getLetter().ToString() + "\t" + keySettings[1].getLetter().ToString() + "\t" + keySettings[2].getLetter().ToString() + "\t" + keySettings[3].getLetter().ToString() + "\t";
         printTextKeys.text = stringText;
 
         //Show key screen for some seconds
         StartCoroutine(ShowSubMenu(timeTextKeysFirstTime));
-        
     }
 
     IEnumerator ShowSubMenu(float value)
     {
         KeysCanvas.SetActive(true);
         GameCanvas.SetActive(false);
-
         isInKeyCanvas = true;
         yield return new WaitForSeconds(value);
         KeysCanvas.SetActive(false);
@@ -95,7 +103,6 @@ public class ControlGameScipt : MonoBehaviour {
             // If it is in keycanvas, don't do anthing this turn
             if (isInKeyCanvas)
                 return;
-
             //Check if we have the correct key or is it a tab
             if (Input.GetKeyDown(KeyCode.Tab))
             {
@@ -122,7 +129,7 @@ public class ControlGameScipt : MonoBehaviour {
                         {
                             SceneManager.LoadScene(WINNINGSCREEN);
                         }
-                        // If you finished the row
+                        // If you finished the row genereta the next four ones
                         if (pointerInArray == 4)
                         {
                             getNextFour();
@@ -137,24 +144,19 @@ public class ControlGameScipt : MonoBehaviour {
 
             }
         }
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Debug.Log("Yay");
-        //}
-        //else
-        //{
-        //    Debug.Log("Nay");
-        //}
     }
 
     private void getNextFour()
     {
         pointerInArray = 0;
         // Generate the body parts
-        for (int index = 0; index < 4; ++index, currentTilesToDo[index].SetBodyPart((BodyParts)Random.Range(0, 4)))
+        for (int index = 0; index < 4; ++index)
         {
-            Debug.Log(currentTilesToDo[index]);
+            currentTilesToDo[index].SetBodyPart((BodyParts)Random.Range(0, 4));
+            //Get the body part that needs to be done
+            BodyParts bp = (currentTilesToDo[index].GetBodyPart());
+            //Put each in screen
+            Debug.Log(keySettings[(int) bp].getLetter());
         }
     }
 

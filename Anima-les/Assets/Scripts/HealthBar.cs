@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public int startingHealth = 3;                           
+    public int currentHealth;
+
+    void Start()
+    {
+        // Set the initial health of the player.
+        currentHealth = startingHealth;
+    }
+
+
+
+    void reduceHeart()
+    {
+        --currentHealth;
+    }
 }

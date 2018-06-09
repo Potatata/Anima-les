@@ -5,6 +5,10 @@ using UnityEngine;
 public class Timer : MonoBehaviour {
 
     float currentTime;
+    public float x;
+    public float y;
+    public float height;
+    public float width;
 	// Use this for initialization
 	void Start () {
         currentTime = 30.0f;
@@ -21,6 +25,6 @@ public class Timer : MonoBehaviour {
 
     private void OnGUI()
     {
-        GUI.Box(new Rect(20, 50, 20, 40), ""+ currentTime.ToString("0"));
+        GUI.Box(new Rect(x, y, width, height), ""+ currentTime.ToString("0"));
     }
 }

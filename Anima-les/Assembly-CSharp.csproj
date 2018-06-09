@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BodyParts.cs" />
+    <Compile Include="Assets\Scripts\ControlGameScipt.cs" />
     <Compile Include="Assets\Scripts\GameBar.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\InputKeys.cs" />

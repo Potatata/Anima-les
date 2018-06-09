@@ -1,21 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class ControlGameScipt : MonoBehaviour {
-
-    public GameObject Health1, Health2, Health3, Timer, Witch, GameBar, /*Witch,*/ Potion/*, GameOver, Win*/, MagicFraskIconFull, MagicFraskIconHalfFull, MagicFraskIconNotVeryEmpty, MagicFraskIconEmpty;
+    //Constants
+    private const int MAINMENUINDEX = 0;
+    private const int WINNINGSCREEN = 3;
+    private const int LOSSSCREEN = 4;
     public const int HEALTHBYGAME = 3;
     public const int POTIONBYMATCH = 3;
     public const int NUMBEROFTILESTOCOMPLETE = 40;
 
+    //References
+    public GameObject Health1, Health2, Health3, Timer, Witch, GameBar, Potion, MagicFraskIconFull, MagicFraskIconHalfFull, MagicFraskIconNotVeryEmpty, MagicFraskIconEmpty, KeysCanvas, GameCanvas;
+
+    //Health in the game
     public int currentHealth;
     public int potionLevel;
+    public Text printTextKeys;
+    public float timeTextKeysFirstTime;
+    public float timeTextKeysOtherTimes;
 
+
+    //Private variables
     private int currentNumberOfTiles;
     private int animalForTheTurn;
     private int pointerInArray;
 
+    // Data arrays
     private InputKeys[] keySettings;
     private VectorPair[] currentTilesToDo;
 
@@ -23,18 +38,26 @@ public class ControlGameScipt : MonoBehaviour {
     {   
         // set the health
         currentHealth = HEALTHBYGAME;
+        potionLevel = POTIONBYMATCH;
 
         //gets which animal we will do
         animalForTheTurn = (int)Random.Range(0, 4);
-        //generate which letter is destined to each body part
+
+        //instance variables and arrays
         keySettings = new InputKeys[4];
+        currentTilesToDo = new VectorPair[4];
+        pointerInArray = 0;
+        //generate which letter is destined to each body part
 
         // Check there is no repeated values and if there is, correct it
         Dictionary<char, byte> hash = new Dictionary<char, byte>();
-        hash.Add(keySettings[0].getLetter(), 0);
         // Check the rest of the hash map
-        for (int index = 1; index < 4; ++index)
+        for (int index = 0; index < 4; ++index)
         {
+            keySettings[index] = new InputKeys();
+            currentTilesToDo[index] = new VectorPair();
+            //Set the body part value
+            keySettings[index].setBodyPart((BodyParts)(index));
             //While it is a key that is in the hash map, get another one
             while (hash.ContainsKey(keySettings[index].getLetter()))
                 keySettings[index].generateLetter();
@@ -42,84 +65,57 @@ public class ControlGameScipt : MonoBehaviour {
         }
 
         //Set variables for the beggining of the game
-        setGameBeggining();
+        setValues();
+       
+        // Save the text for the KeysMenu
+        string stringText= keySettings[0].getLetter().ToString() + "\t" + keySettings[1].getLetter().ToString() + "\t" + keySettings[2].getLetter().ToString() + "\t" + keySettings[3].getLetter().ToString() + "\t";
+        printTextKeys.text = stringText;
+
+        //Show key screen for some seconds
+/*        ShowSubMenu(timeTextKeysFirstTime);
+        HideSubMenu();*/
     }
+
+
 
     // Update is called once per frame
     void Update () {
         //Check if we have the correct key or is it a tab
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            //Check if it can check it's potion level
-            if(potionLevel!=0)
-            {
-                --potionLevel;
-                //If it can, update one of the potion level stuff 
-                switch (potionLevel)
-                {
-                    case 2:
-                        MagicFraskIconFull.SetActive(false);
-                        MagicFraskIconHalfFull.SetActive(true);
-                        break;
-                    case 1:
-                        MagicFraskIconHalfFull.SetActive(false);
-                        MagicFraskIconNotVeryEmpty.SetActive(true);
-                        break;
-                    case 0:
-                        MagicFraskIconNotVeryEmpty.SetActive(false);
-                        MagicFraskIconEmpty.SetActive(true);
-                        break;
-                }
-
-                //Show the screen while a key is pressed
-                
-            }
+            potionSet();
         }
-        //Check if we got the correct input
         else
         {
             // If it is an escape, return to the main menu
             if(Input.GetKeyDown(KeyCode.Escape))
             {
-                //@TODO GO TO MAIN MENU
+                // Go to main menu
+                SceneManager.LoadScene(MAINMENUINDEX);
             }
             else
             {
                 KeyCode currentKey = keySettings[(int)currentTilesToDo[pointerInArray].GetBodyPart()].GetKeyDownCode();
-
                 //If it is the correct key we continue the game without any problem
                 if (Input.GetKeyDown(currentKey))
                 {
                     ++currentNumberOfTiles;
                     ++pointerInArray;
+                    // If you finished the game
+                    if (NUMBEROFTILESTOCOMPLETE == currentNumberOfTiles)
+                    {
+                        SceneManager.LoadScene(WINNINGSCREEN);
+                    }
                     // If you finished the row
                     if (pointerInArray == 4)
                     {
                         getNextFour();
                     }
-                    if (NUMBEROFTILESTOCOMPLETE == currentNumberOfTiles)
-                    {
-                        //GAME END GOOD
-                    }
                 }
-                //If it is the incorrect key, we have to reduce a life and check if we have a gameover
-                // Reduce the amount of hearts in the game
-                --currentHealth;
-                //Update the hearts and check if there was a gameover
-                switch (currentHealth)
+                else
                 {
-                    case 2:
-                        Health1.SetActive(false);
-                        break;
-                    case 1:
-                        Health2.SetActive(false);
-                        break;
-                    case 0:
-                        Health3.SetActive(false);
-                        // Finish the game
-                        break;
+                    HealthSet();
                 }
-
             }
 
         }
@@ -132,19 +128,79 @@ public class ControlGameScipt : MonoBehaviour {
 
     }
 
-    private void setGameBeggining()
+    private void setValues()
     {
         //Set all game hearts
         Health1.SetActive(true);
         Health2.SetActive(false);
         Health3.SetActive(false);
 
-
         // Set all flasks
         MagicFraskIconFull.SetActive(true);
         MagicFraskIconHalfFull.SetActive(false);
         MagicFraskIconNotVeryEmpty.SetActive(false);
         MagicFraskIconEmpty.SetActive(false);
+
+    }
+
+    private void potionSet ()
+    {
+        //Check if it can check it's potion level
+        if (potionLevel != 0)
+        {
+            --potionLevel;
+            //If it can, update one of the potion level stuff 
+            switch (potionLevel)
+            {
+                case 2:
+                    MagicFraskIconFull.SetActive(false);
+                    MagicFraskIconHalfFull.SetActive(true);
+                    break;
+                case 1:
+                    MagicFraskIconHalfFull.SetActive(false);
+                    MagicFraskIconNotVeryEmpty.SetActive(true);
+                    break;
+                case 0:
+                    MagicFraskIconNotVeryEmpty.SetActive(false);
+                    MagicFraskIconEmpty.SetActive(true);
+                    break;
+            }
+            //TODO Show the screen while a key is pressed
+        }
+    }
+
+    private void HealthSet()
+    {
+        //If it is the incorrect key, we have to reduce a life and check if we have a gameover
+        // Reduce the amount of hearts in the game
+        --currentHealth;
+        //Update the hearts and check if there was a gameover
+        switch (currentHealth)
+        {
+            case 2:
+                Health1.SetActive(false);
+                break;
+            case 1:
+                Health2.SetActive(false);
+                break;
+            case 0:
+                Health3.SetActive(false);
+                SceneManager.LoadScene(LOSSSCREEN);
+                break;
+        }
+    }
+
+    IEnumerator ShowSubMenu(float value)
+    {
+        KeysCanvas.SetActive(true);
+        yield return new WaitForSeconds(value);
+        GameCanvas.SetActive(false);
+    }
+
+    void HideSubMenu ()
+    {
+        KeysCanvas.SetActive(false);
+        GameCanvas.SetActive(true);
 
     }
 

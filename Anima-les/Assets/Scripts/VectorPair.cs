@@ -1,12 +1,14 @@
-﻿public class VectorPair {
+﻿using UnityEngine;
+
+public class VectorPair {
 
 
     private BodyParts bodyParts;
     private bool status;
 
-    public VectorPair(BodyParts bp)
+    public VectorPair()
     {
-        bodyParts = bp;
+        bodyParts =(BodyParts)Random.Range(0, 4);
         status = false;
     }
 

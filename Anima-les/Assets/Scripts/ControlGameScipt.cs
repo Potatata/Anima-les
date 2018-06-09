@@ -10,8 +10,6 @@ public class ControlGameScipt : MonoBehaviour {
     private const int MAINMENUINDEX = 0;
     private const int WINNINGSCREEN = 3;
     private const int LOSSSCREEN = 4;
-    public const int HEALTHBYGAME = 3;
-    public const int POTIONBYMATCH = 3;
     public const int NUMBEROFTILESTOCOMPLETE = 40;
 
     //References
@@ -23,12 +21,15 @@ public class ControlGameScipt : MonoBehaviour {
     public Text printTextKeys;
     public float timeTextKeysFirstTime;
     public float timeTextKeysOtherTimes;
+    public float currentTime;
 
 
     //Private variables
     private int currentNumberOfTiles;
     private int animalForTheTurn;
     private int pointerInArray;
+    private bool isInKeyCanvas;
+    private float lastTimePressed =0;
 
     // Data arrays
     private InputKeys[] keySettings;
@@ -36,10 +37,6 @@ public class ControlGameScipt : MonoBehaviour {
 
     void Start ()
     {   
-        // set the health
-        currentHealth = HEALTHBYGAME;
-        potionLevel = POTIONBYMATCH;
-
         //gets which animal we will do
         animalForTheTurn = (int)Random.Range(0, 4);
 
@@ -47,6 +44,7 @@ public class ControlGameScipt : MonoBehaviour {
         keySettings = new InputKeys[4];
         currentTilesToDo = new VectorPair[4];
         pointerInArray = 0;
+        isInKeyCanvas = false;
         //generate which letter is destined to each body part
 
         // Check there is no repeated values and if there is, correct it
@@ -72,59 +70,80 @@ public class ControlGameScipt : MonoBehaviour {
         printTextKeys.text = stringText;
 
         //Show key screen for some seconds
-/*        ShowSubMenu(timeTextKeysFirstTime);
-        HideSubMenu();*/
+        ShowSubMenu(timeTextKeysFirstTime);
     }
 
-
+    IEnumerator ShowSubMenu(float value)
+    {
+        KeysCanvas.SetActive(true);
+        GameCanvas.SetActive(false);
+        isInKeyCanvas = true;
+        yield return new WaitForSeconds(value);
+        KeysCanvas.SetActive(false);
+        GameCanvas.SetActive(true);
+        isInKeyCanvas = false;
+    }
 
     // Update is called once per frame
     void Update () {
-        //Check if we have the correct key or is it a tab
-        if(Input.GetKeyDown(KeyCode.Tab))
+        currentTime -= Time.deltaTime;
+        //If there was any kind of input
+        if (Input.anyKey)
         {
-            potionSet();
-        }
-        else
-        {
-            // If it is an escape, return to the main menu
-            if(Input.GetKeyDown(KeyCode.Escape))
+            //Check if there still has been no timeout
+            if(currentTime< 0.0f)
+                SceneManager.LoadScene(LOSSSCREEN);
+            // If it is in keycanvas, don't do anthing this turn
+            if (isInKeyCanvas)
+                return;
+
+            //Check if we have the correct key or is it a tab
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
-                // Go to main menu
-                SceneManager.LoadScene(MAINMENUINDEX);
+                potionSet();
             }
             else
             {
-                KeyCode currentKey = keySettings[(int)currentTilesToDo[pointerInArray].GetBodyPart()].GetKeyDownCode();
-                //If it is the correct key we continue the game without any problem
-                if (Input.GetKeyDown(currentKey))
+                // If it is an escape, return to the main menu
+                if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    ++currentNumberOfTiles;
-                    ++pointerInArray;
-                    // If you finished the game
-                    if (NUMBEROFTILESTOCOMPLETE == currentNumberOfTiles)
-                    {
-                        SceneManager.LoadScene(WINNINGSCREEN);
-                    }
-                    // If you finished the row
-                    if (pointerInArray == 4)
-                    {
-                        getNextFour();
-                    }
+                    // Go to main menu
+                    SceneManager.LoadScene(MAINMENUINDEX);
                 }
                 else
                 {
-                    HealthSet();
+                    KeyCode currentKey = keySettings[(int)currentTilesToDo[pointerInArray].GetBodyPart()].GetKeyDownCode();
+                    //If it is the correct key we continue the game without any problem
+                    if (Input.GetKeyDown(currentKey))
+                    {
+                        ++currentNumberOfTiles;
+                        ++pointerInArray;
+                        // If you finished the game
+                        if (NUMBEROFTILESTOCOMPLETE == currentNumberOfTiles)
+                        {
+                            SceneManager.LoadScene(WINNINGSCREEN);
+                        }
+                        // If you finished the row
+                        if (pointerInArray == 4)
+                        {
+                            getNextFour();
+                        }
+                    }
+                    // if it isn't the correct key, penalty
+                    else
+                    {
+                        HealthSet();
+                    }
                 }
             }
-
         }
+        
     }
     private void getNextFour()
     {
         pointerInArray = 0;
         // Generate the body parts
-        for (int index = 0; index < 4; ++index, currentTilesToDo[index].SetBodyPart((BodyParts)Random.Range(0, 4))) ;
+        for (int index = 0; index < 4; ++index, currentTilesToDo[index].SetBodyPart((BodyParts)Random.Range(0, 4)));
 
     }
 
@@ -140,7 +159,6 @@ public class ControlGameScipt : MonoBehaviour {
         MagicFraskIconHalfFull.SetActive(false);
         MagicFraskIconNotVeryEmpty.SetActive(false);
         MagicFraskIconEmpty.SetActive(false);
-
     }
 
     private void potionSet ()
@@ -165,7 +183,6 @@ public class ControlGameScipt : MonoBehaviour {
                     MagicFraskIconEmpty.SetActive(true);
                     break;
             }
-            //TODO Show the screen while a key is pressed
         }
     }
 
@@ -188,20 +205,6 @@ public class ControlGameScipt : MonoBehaviour {
                 SceneManager.LoadScene(LOSSSCREEN);
                 break;
         }
-    }
-
-    IEnumerator ShowSubMenu(float value)
-    {
-        KeysCanvas.SetActive(true);
-        yield return new WaitForSeconds(value);
-        GameCanvas.SetActive(false);
-    }
-
-    void HideSubMenu ()
-    {
-        KeysCanvas.SetActive(false);
-        GameCanvas.SetActive(true);
-
     }
 
 }

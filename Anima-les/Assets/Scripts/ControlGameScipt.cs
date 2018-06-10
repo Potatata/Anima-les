@@ -60,7 +60,6 @@ public class ControlGameScipt : MonoBehaviour {
         // Check the rest of the hash map
         for (int index = 0; index < 4; ++index)
         {
-            Debug.Log(index.ToString());
             keySettings[index] = new InputKeys();
             currentTilesToDo[index] = new VectorPair();
 
@@ -72,10 +71,6 @@ public class ControlGameScipt : MonoBehaviour {
             while (hash.ContainsKey(keySettings[index].getLetter()))
                 keySettings[index].generateLetter();
             hash.Add(keySettings[index].getLetter(), 0);
-            ///CHECK IF IT IS GENERATED CORRECTLY
-
-             Debug.Log(currentTilesToDo[index].GetBodyPart());
-
         }
 
         //Set variables for the beggining of the game

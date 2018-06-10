@@ -12,13 +12,6 @@ public class ControlGameScipt : MonoBehaviour {
     private const int LOSSSCREEN = 4;
     public const int NUMBEROFTILESTOCOMPLETE = 40;
 
-    // Constants place in screen
-    private const int PLACESQUARE1 = 30;
-    private const int PLACESQUARE2 = 60;
-    private const int PLACESQUARE3 = 90;
-    private const int PLACESQUARE4 = 120;
-
-
     //References
     public GameObject Health1, Health2, Health3, Timer, Witch, GameBar;
     public GameObject MagicFraskIconFull, MagicFraskIconHalfFull, MagicFraskIconNotVeryEmpty, MagicFraskIconEmpty, KeysCanvas, GameCanvas;
@@ -30,7 +23,6 @@ public class ControlGameScipt : MonoBehaviour {
     public float timeTextKeysFirstTime;
     public float timeTextKeysOtherTimes;
     public float currentTime;
-
 
     //Private variables
     private int currentNumberOfTiles;
@@ -79,8 +71,8 @@ public class ControlGameScipt : MonoBehaviour {
 
         // Save the text for the KeysMenu
 
-        string stringText = keySettings[0].getLetter().ToString() + "\t\t\t" + keySettings[1].getLetter().ToString() + "\t\t\t\t" + keySettings[2].getLetter().ToString() + "\t\t\t\t" + keySettings[3].getLetter().ToString();
-
+        string stringText = keySettings[0].getLetter().ToString() + " " + keySettings[1].getLetter().ToString() + " " + keySettings[2].getLetter().ToString() + " " + keySettings[3].getLetter().ToString();
+        Debug.Log(stringText);
         printTextKeys.text = stringText;
 
         //Show key screen for some seconds
@@ -211,7 +203,6 @@ public class ControlGameScipt : MonoBehaviour {
 
     private void HealthSet()
     {
-        Debug.Log("Perdi un punto");
         //If it is the incorrect key, we have to reduce a life and check if we have a gameover
         // Reduce the amount of hearts in the game
         --currentHealth;

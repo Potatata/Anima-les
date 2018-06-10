@@ -164,36 +164,32 @@ public class ControlGameScipt : MonoBehaviour {
     {
         //Set all game Lifes
         Life1.SetActive(true);
-        Life2.SetActive(false);
-        Life3.SetActive(false);
+        Life2.SetActive(true);
+        Life3.SetActive(true);
 
         // Set all flasks
-        MagicFraskIconFull.SetActive(true);
-        MagicFraskIconHalfFull.SetActive(false);
-        MagicFraskIconNotVeryEmpty.SetActive(false);
-        MagicFraskIconEmpty.SetActive(false);
+        Clues1.SetActive(true);
+        Clues2.SetActive(true);
+        Clues3.SetActive(true);
     }
 
     private void potionSet ()
     {
         //Check if it can check it's potion level
-        if (potionLevel != 0)
+        if (potionLevel > 0)
         {
             --potionLevel;
             //If it can, update one of the potion level stuff 
             switch (potionLevel)
             {
                 case 2:
-                    MagicFraskIconFull.SetActive(false);
-                    MagicFraskIconHalfFull.SetActive(true);
+                    Clues1.SetActive(false);
                     break;
                 case 1:
-                    MagicFraskIconHalfFull.SetActive(false);
-                    MagicFraskIconNotVeryEmpty.SetActive(true);
+                    Clues2.SetActive(false);
                     break;
                 case 0:
-                    MagicFraskIconNotVeryEmpty.SetActive(false);
-                    MagicFraskIconEmpty.SetActive(true);
+                    Clues3.SetActive(false);
                     break;
             }
             ShowSubMenu(timeTextKeysOtherTimes);

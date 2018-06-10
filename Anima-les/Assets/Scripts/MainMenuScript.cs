@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour {
 
     private const int MAINMENUINDEX = 0;
-    private const int CREDITINDEX = 1;
+    private const int INSTRUCTIONINDEX = 5;
     private const int PLAYINDEX = 2;
 
     public void PlayGame()
@@ -16,7 +16,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public void CreditsGame()
     {
-        SceneManager.LoadScene(CREDITINDEX);
+        SceneManager.LoadScene(INSTRUCTIONINDEX);
     }
 
     public void QuitGame()

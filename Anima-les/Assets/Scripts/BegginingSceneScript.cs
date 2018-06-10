@@ -13,7 +13,6 @@ public class BegginingSceneScript : MonoBehaviour {
     {
         StartCoroutine(Wait());
         SceneManager.LoadScene(MAINMENUINDEX);
-
     }
 
     IEnumerator Wait()

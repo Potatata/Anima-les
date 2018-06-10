@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/MainMenuScreen.unity
     guid: d7a5d6f8a8b6c3b45910329cad30d9b1
   - enabled: 1
-    path: Assets/_Scenes/CreditsScreen.unity
-    guid: 4afdf1274b4972d4099becb7408ae77e
+    path: Assets/_Scenes/BegginingScene.unity
+    guid: 87b376dbe9ba5324387d16afc3648c3e
   - enabled: 1
     path: Assets/_Scenes/GameScreen.unity
     guid: 09ce250276a41c34698743a25ab953fd
@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/GameLossScreen.unity
     guid: 905c19541aafda34d9f6f5b70f64737e
+  - enabled: 1
+    path: Assets/_Scenes/InstructionsScene.unity
+    guid: 3090622b09a322640a995bfc04230b87
   m_configObjects: {}

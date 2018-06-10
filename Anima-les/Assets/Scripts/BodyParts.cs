@@ -1,3 +1,3 @@
 ﻿
-public enum BodyParts { Wings, Feet, Mouth, Eye }
+public enum BodyParts { Wings = 0, Feet, Mouth, Eye }
 

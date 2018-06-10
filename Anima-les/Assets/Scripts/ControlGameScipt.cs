@@ -42,6 +42,9 @@ public class ControlGameScipt : MonoBehaviour {
     private InputKeys[] keySettings;
     private VectorPair[] currentTilesToDo;
 
+    [SerializeField]
+    private List<BoxScript> _boxes;
+
     void Start ()
     {   
 
@@ -57,20 +60,27 @@ public class ControlGameScipt : MonoBehaviour {
         // Check the rest of the hash map
         for (int index = 0; index < 4; ++index)
         {
+            Debug.Log(index.ToString());
             keySettings[index] = new InputKeys();
             currentTilesToDo[index] = new VectorPair();
+
+            _boxes[index].SetPendingState(true);
+            _boxes[index].SetBodyPart(currentTilesToDo[index].GetBodyPart());
             //Set the body part value
             keySettings[index].setBodyPart((BodyParts)(index));
             //While it is a key that is in the hash map, get another one
             while (hash.ContainsKey(keySettings[index].getLetter()))
                 keySettings[index].generateLetter();
             hash.Add(keySettings[index].getLetter(), 0);
+            ///CHECK IF IT IS GENERATED CORRECTLY
+
+             Debug.Log(currentTilesToDo[index].GetBodyPart());
+
         }
 
         //Set variables for the beggining of the game
         setValues();
-        // Set the first vector to do
-        getNextFour();
+
 
         // Save the text for the KeysMenu
         string stringText = keySettings[0].getLetter().ToString() + "\t" + keySettings[1].getLetter().ToString() + "\t" + keySettings[2].getLetter().ToString() + "\t" + keySettings[3].getLetter().ToString() + "\t";
@@ -94,12 +104,12 @@ public class ControlGameScipt : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         currentTime -= Time.deltaTime;
+        //Check if there still has been no timeout
+        if (currentTime < 0.0f)
+            SceneManager.LoadScene(LOSSSCREEN);
         //If there was any kind of input
         if (Input.anyKeyDown)
         {
-            //Check if there still has been no timeout
-            if (currentTime < 0.0f)
-                SceneManager.LoadScene(LOSSSCREEN);
             // If it is in keycanvas, don't do anthing this turn
             if (isInKeyCanvas)
                 return;
@@ -122,8 +132,10 @@ public class ControlGameScipt : MonoBehaviour {
                     //If it is the correct key we continue the game without any problem
                     if (Input.GetKeyDown(currentKey))
                     {
+                        _boxes[pointerInArray].SetPendingState(false);
                         ++currentNumberOfTiles;
                         ++pointerInArray;
+
                         // If you finished the game
                         if (NUMBEROFTILESTOCOMPLETE == currentNumberOfTiles)
                         {

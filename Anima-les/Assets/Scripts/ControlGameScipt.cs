@@ -10,7 +10,7 @@ public class ControlGameScipt : MonoBehaviour {
     private const int MAINMENUINDEX = 0;
     private const int WINNINGSCREEN = 3;
     private const int LOSSSCREEN = 4;
-    public const int NUMBEROFTILESTOCOMPLETE = 1;
+    public const int NUMBEROFTILESTOCOMPLETE = 20;
 
     //References
     public GameObject Life1, Life2, Life3, Timer, Clues1, Clues2, Clues3, KeysCanvas, GameCanvas;
@@ -71,7 +71,6 @@ public class ControlGameScipt : MonoBehaviour {
         // Save the text for the KeysMenu
 
         string stringText = keySettings[0].getLetter().ToString() + " " + keySettings[1].getLetter().ToString() + " " + keySettings[2].getLetter().ToString() + " " + keySettings[3].getLetter().ToString();
-        Debug.Log(stringText);
         printTextKeys.text = stringText;
 
         //Show key screen for some seconds
@@ -148,6 +147,7 @@ public class ControlGameScipt : MonoBehaviour {
 
     private void getNextFour()
     {
+
         pointerInArray = 0;
         // Generate the body parts
         for (int index = 0; index < 4; ++index)
@@ -156,7 +156,10 @@ public class ControlGameScipt : MonoBehaviour {
             //Get the body part that needs to be done
             BodyParts bp = (currentTilesToDo[index].GetBodyPart());
             //Put each in screen
-            Debug.Log(keySettings[(int) bp].getLetter());
+            Debug.Log(keySettings[(int)bp].getLetter());
+            //TODO HERE
+            _boxes[index].SetPendingState(true);
+            _boxes[index].SetBodyPart(currentTilesToDo[index].GetBodyPart());
         }
     }
 

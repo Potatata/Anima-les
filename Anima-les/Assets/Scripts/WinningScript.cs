@@ -10,11 +10,11 @@ public class WinningScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         StartCoroutine(Wait());
-        SceneManager.LoadScene(MAINMENUINDEX);
     }
 
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(10.0f);
+        SceneManager.LoadScene(MAINMENUINDEX);
     }
 }

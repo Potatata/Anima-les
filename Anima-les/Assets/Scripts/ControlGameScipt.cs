@@ -10,7 +10,7 @@ public class ControlGameScipt : MonoBehaviour {
     private const int MAINMENUINDEX = 0;
     private const int WINNINGSCREEN = 3;
     private const int LOSSSCREEN = 4;
-    public const int NUMBEROFTILESTOCOMPLETE = 20;
+    public const int NUMBEROFTILESTOCOMPLETE = 1;
 
     //References
     public GameObject Life1, Life2, Life3, Timer, Clues1, Clues2, Clues3, KeysCanvas, GameCanvas;
@@ -192,7 +192,8 @@ public class ControlGameScipt : MonoBehaviour {
                     Clues3.SetActive(false);
                     break;
             }
-            ShowSubMenu(timeTextKeysOtherTimes);
+            StartCoroutine(ShowSubMenu(timeTextKeysOtherTimes));
+            currentTime += timeTextKeysOtherTimes;
         }
     }
 

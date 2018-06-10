@@ -14,7 +14,7 @@ public class MainMenuScript : MonoBehaviour {
         SceneManager.LoadScene(PLAYINDEX);
     }
 
-    public void CreditsGame()
+    public void InstructionsGame()
     {
         SceneManager.LoadScene(INSTRUCTIONINDEX);
     }

@@ -2,7 +2,6 @@
 
 public class VectorPair {
 
-
     private BodyParts bodyParts;
     private bool status;
 

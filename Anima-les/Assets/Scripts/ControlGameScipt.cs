@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
 public class ControlGameScipt : MonoBehaviour {
     //Constants
     private const int MAINMENUINDEX = 1;
@@ -38,9 +37,23 @@ public class ControlGameScipt : MonoBehaviour {
     [SerializeField]
     private List<BoxScript> _boxes;
 
-    void Start ()
-    {   
+    // audio
+    public AudioClip correctPlaySound;
+    public AudioClip incorrectPlaySound;
+    public AudioClip trackMusic;
 
+    public AudioSource correctPlaySoundMusicSource;
+    public AudioSource incorrectPlaySoundMusicSource;
+    public AudioSource trackMusicMusicSource;
+
+    void Start ()
+    {
+        // start audio stuff
+        correctPlaySoundMusicSource.clip = correctPlaySound;
+        incorrectPlaySoundMusicSource.clip = incorrectPlaySound;
+        trackMusicMusicSource.clip = trackMusic;
+
+        trackMusicMusicSource.Play();
         //instance variables and arrays
         keySettings = new InputKeys[4];
         currentTilesToDo = new VectorPair[4];
@@ -119,6 +132,7 @@ public class ControlGameScipt : MonoBehaviour {
                     //If it is the correct key we continue the game without any problem
                     if (Input.GetKeyDown(currentKey))
                     {
+                        correctPlaySoundMusicSource.Play();
                         _boxes[pointerInArray].SetPendingState(false);
                         ++currentNumberOfTiles;
                         ++pointerInArray;
@@ -204,6 +218,7 @@ public class ControlGameScipt : MonoBehaviour {
     {
         //If it is the incorrect key, we have to reduce a life and check if we have a gameover
         // Reduce the amount of Lifes in the game
+        incorrectPlaySoundMusicSource.Play();
         --currentLife;
         //Update the Lifes and check if there was a gameover
         switch (currentLife)

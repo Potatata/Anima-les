@@ -205,13 +205,13 @@ public class ControlGameScipt : MonoBehaviour {
         switch (currentLife)
         {
             case 2:
-                Life1.SetActive(false);
+                Life3.SetActive(false);
                 break;
             case 1:
                 Life2.SetActive(false);
                 break;
             case 0:
-                Life3.SetActive(false);
+                Life1.SetActive(false);
                 SceneManager.LoadScene(LOSSSCREEN);
                 break;
         }

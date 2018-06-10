@@ -16,7 +16,7 @@ public class BegginingSceneScript : MonoBehaviour {
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(5.0f);
         SceneManager.LoadScene(MAINMENUINDEX);
     }
 }

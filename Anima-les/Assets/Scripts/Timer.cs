@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Timer : MonoBehaviour {
-    public float x;
-    public float y;
-    public float height;
-    public float width;
+    private float x = Screen.width - Screen.width/10;
+    private float y = Screen.height/2;
+    private float height;
+    private float width;
     public float currentTime;
 
     // Use this for initialization
     void Start () {
+        width = Screen.width / 12;
+        height = Screen.height / 12;
+        x = Screen.width - Screen.width / 10;
+        y = Screen.height / 2;
     }
 	
 	// Update is called once per frame

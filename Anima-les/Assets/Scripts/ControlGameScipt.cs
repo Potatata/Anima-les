@@ -78,7 +78,9 @@ public class ControlGameScipt : MonoBehaviour {
 
 
         // Save the text for the KeysMenu
-        string stringText = keySettings[0].getLetter().ToString() + "\t" + keySettings[1].getLetter().ToString() + "\t" + keySettings[2].getLetter().ToString() + "\t" + keySettings[3].getLetter().ToString() + "\t";
+
+        string stringText = keySettings[0].getLetter().ToString() + "\t\t\t" + keySettings[1].getLetter().ToString() + "\t\t\t\t" + keySettings[2].getLetter().ToString() + "\t\t\t\t" + keySettings[3].getLetter().ToString();
+
         printTextKeys.text = stringText;
 
         //Show key screen for some seconds

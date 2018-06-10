@@ -11,10 +11,10 @@ public class Timer : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        width = Screen.width / 12;
-        height = Screen.height / 12;
-        x = Screen.width - Screen.width / 10;
-        y = Screen.height / 2;
+        width = Screen.width / 16;
+        height = Screen.height / 16;
+        x = Screen.width - Screen.width *2/15;
+        y = Screen.height / 2 - Screen.height/42;
     }
 	
 	// Update is called once per frame

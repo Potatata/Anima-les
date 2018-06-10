@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\ControlGameScipt.cs" />
     <Compile Include="Assets\Scripts\InputKeys.cs" />
     <Compile Include="Assets\Scripts\InstructionScript.cs" />
+    <Compile Include="Assets\Scripts\LossScript.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\VectorPair.cs" />

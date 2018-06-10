@@ -10,14 +10,13 @@ public class ControlGameScipt : MonoBehaviour {
     private const int MAINMENUINDEX = 0;
     private const int WINNINGSCREEN = 3;
     private const int LOSSSCREEN = 4;
-    public const int NUMBEROFTILESTOCOMPLETE = 40;
+    public const int NUMBEROFTILESTOCOMPLETE = 20;
 
     //References
-    public GameObject Health1, Health2, Health3, Timer, Witch, GameBar;
-    public GameObject MagicFraskIconFull, MagicFraskIconHalfFull, MagicFraskIconNotVeryEmpty, MagicFraskIconEmpty, KeysCanvas, GameCanvas;
+    public GameObject Life1, Life2, Life3, Timer, Clues1, Clues2, Clues3, KeysCanvas, GameCanvas;
     
-    //Health in the game
-    public int currentHealth;
+    //Life in the game
+    public int currentLife;
     public int potionLevel;
     public Text printTextKeys;
     public float timeTextKeysFirstTime;
@@ -139,7 +138,7 @@ public class ControlGameScipt : MonoBehaviour {
                     // if it isn't the correct key, penalty
                     else
                     {
-                        HealthSet();
+                        LifeSet();
                     }
                 }
 
@@ -163,10 +162,10 @@ public class ControlGameScipt : MonoBehaviour {
 
     private void setValues()
     {
-        //Set all game hearts
-        Health1.SetActive(true);
-        Health2.SetActive(false);
-        Health3.SetActive(false);
+        //Set all game Lifes
+        Life1.SetActive(true);
+        Life2.SetActive(false);
+        Life3.SetActive(false);
 
         // Set all flasks
         MagicFraskIconFull.SetActive(true);
@@ -201,22 +200,22 @@ public class ControlGameScipt : MonoBehaviour {
         }
     }
 
-    private void HealthSet()
+    private void LifeSet()
     {
         //If it is the incorrect key, we have to reduce a life and check if we have a gameover
-        // Reduce the amount of hearts in the game
-        --currentHealth;
-        //Update the hearts and check if there was a gameover
-        switch (currentHealth)
+        // Reduce the amount of Lifes in the game
+        --currentLife;
+        //Update the Lifes and check if there was a gameover
+        switch (currentLife)
         {
             case 2:
-                Health1.SetActive(false);
+                Life1.SetActive(false);
                 break;
             case 1:
-                Health2.SetActive(false);
+                Life2.SetActive(false);
                 break;
             case 0:
-                Health3.SetActive(false);
+                Life3.SetActive(false);
                 SceneManager.LoadScene(LOSSSCREEN);
                 break;
         }

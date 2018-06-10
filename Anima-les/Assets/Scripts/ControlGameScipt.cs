@@ -18,7 +18,9 @@ public class ControlGameScipt : MonoBehaviour {
     //Life in the game
     public int currentLife;
     public int potionLevel;
-    public Text printTextKeys;
+
+    public Text printKeyText;
+
     public float timeTextKeysFirstTime;
     public float timeTextKeysOtherTimes;
     public float currentTime;
@@ -69,9 +71,7 @@ public class ControlGameScipt : MonoBehaviour {
 
 
         // Save the text for the KeysMenu
-
-        string stringText = keySettings[0].getLetter().ToString() + " " + keySettings[1].getLetter().ToString() + " " + keySettings[2].getLetter().ToString() + " " + keySettings[3].getLetter().ToString();
-        printTextKeys.text = stringText;
+        printKeyText.text = keySettings[0].getLetter().ToString() + "\t\t\t\t" + keySettings[1].getLetter().ToString() + "\t\t\t\t" + keySettings[2].getLetter().ToString() + "\t\t\t\t" + keySettings[3].getLetter().ToString() + "\t\t\t\t";
 
         //Show key screen for some seconds
         StartCoroutine(ShowSubMenu(timeTextKeysFirstTime));

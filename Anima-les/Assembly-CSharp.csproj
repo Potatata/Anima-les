@@ -70,7 +70,7 @@
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\VectorPair.cs" />
     <Compile Include="Assets\Scripts\WinningScript.cs" />
-    <None Include="Assets\Font\Denk_One\OFL.txt" />
+    <None Include="Assets\Resources\Font\Denk_One\OFL.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/pegac/Documents/Sivana/Anima-les/Anima-les/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

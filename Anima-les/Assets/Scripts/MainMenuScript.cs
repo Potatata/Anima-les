@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour {
 
-    private const int MAINMENUINDEX = 0;
+    private const int MAINMENUINDEX = 1;
     private const int INSTRUCTIONINDEX = 5;
     private const int PLAYINDEX = 2;
 

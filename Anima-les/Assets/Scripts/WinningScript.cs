@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class WinningScript : MonoBehaviour {
 
-    private const int MAINMENUINDEX = 0;
+    private const int MAINMENUINDEX = 1;
 
     // Use this for initialization
     void Start () {

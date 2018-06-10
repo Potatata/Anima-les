@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 
 public class InstructionScript : MonoBehaviour {
-    private const int MAINMENUINDEX = 0;
+    private const int MAINMENUINDEX = 1;
     public void ReturnMainMenu()
     {
         SceneManager.LoadScene(MAINMENUINDEX);

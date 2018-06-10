@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ControlGameScipt : MonoBehaviour {
     //Constants
-    private const int MAINMENUINDEX = 0;
+    private const int MAINMENUINDEX = 1;
     private const int WINNINGSCREEN = 3;
     private const int LOSSSCREEN = 4;
     public const int NUMBEROFTILESTOCOMPLETE = 20;
